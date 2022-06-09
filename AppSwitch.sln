@@ -5,10 +5,12 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSwitch", "AppSwitch.csproj", "{6DB96292-5FA5-463F-8473-71CFE4AFF42A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{59E69501-75FA-4BAA-98B3-6E0118AB583B} = {59E69501-75FA-4BAA-98B3-6E0118AB583B}
+		{8F94CC44-C63A-4951-AB15-B9F934D2CEE6} = {8F94CC44-C63A-4951-AB15-B9F934D2CEE6}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSwitchLibrary", "AppSwitchLibrary\AppSwitchLibrary.csproj", "{59E69501-75FA-4BAA-98B3-6E0118AB583B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleTimeTracker", "IdleTimeTracker\IdleTimeTracker\IdleTimeTracker.csproj", "{8F94CC44-C63A-4951-AB15-B9F934D2CEE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		{59E69501-75FA-4BAA-98B3-6E0118AB583B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59E69501-75FA-4BAA-98B3-6E0118AB583B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59E69501-75FA-4BAA-98B3-6E0118AB583B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F94CC44-C63A-4951-AB15-B9F934D2CEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F94CC44-C63A-4951-AB15-B9F934D2CEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F94CC44-C63A-4951-AB15-B9F934D2CEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F94CC44-C63A-4951-AB15-B9F934D2CEE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

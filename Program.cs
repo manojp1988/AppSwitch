@@ -1,9 +1,10 @@
-﻿using AppSwitchLibrary;
+﻿
+using IdleTimeTracker;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Threading;
-using System.Windows.Forms;
 using System.Windows.Threading;
 
 namespace AppSwitch
@@ -12,16 +13,25 @@ namespace AppSwitch
     {
 
         static Stopwatch watch = new Stopwatch();
-         
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("Tracking time spent on Notepad....");
 
-             new InputTracker();
+            //FileStream filestream = new FileStream("C:/temp/out.txt", FileMode.Create);
+            //var streamwriter = new StreamWriter(filestream);
+            //streamwriter.AutoFlush = true;
+            //Console.SetOut(streamwriter);
+            //Console.SetError(streamwriter);
 
-             Application.Run(new ApplicationContext());
+            var _timer = new Timer(timer_Tick2, null, 0, 1000);
+            
+            Console.ReadLine();
 
+        }
 
+        private static void timer_Tick2(object state)
+        {
+            Console.WriteLine("Idle Time: " + IdleTimeFinder.GetIdleTime());
         }
     }
 }
