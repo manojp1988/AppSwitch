@@ -9,12 +9,10 @@ namespace AppSwitchLibrary
 {
     public class WindowsHookHelper
     {
-        public delegate IntPtr HookDelegate(
-            Int32 Code, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr HookDelegate(Int32 Code, IntPtr wParam, IntPtr lParam);
 
         [DllImport("User32.dll")]
-        public static extern IntPtr CallNextHookEx(
-            IntPtr hHook, Int32 nCode, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr CallNextHookEx(IntPtr hHook, Int32 nCode, IntPtr wParam, IntPtr lParam);
 
         [DllImport("User32.dll")]
         public static extern IntPtr UnhookWindowsHookEx(IntPtr hHook);
