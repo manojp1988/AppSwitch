@@ -1,5 +1,4 @@
 ﻿using AppSwitchLibrary;
-using System.Windows.Forms;
 
 namespace AppSwitch
 {
@@ -9,7 +8,6 @@ namespace AppSwitch
         {
             new InputTracker();
 
-            Application.Run(new ApplicationContext());
         }
     }
 }

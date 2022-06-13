@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AppSwitchLibrary
 {
@@ -25,17 +26,11 @@ namespace AppSwitchLibrary
             mouse = new MouseInput();
             mouse.MouseMoved += mouse_MouseMoved;
 
-            //lastInput = new AllInputSources();
-            //var _timer = new Timer(timer_Tick2, null, 0, 100);
-
-            
-            //timer = new DispatcherTimer();
-            //timer.Interval = new TimeSpan();
-            //timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
-            //timer.Tick += timer_Tick;
-            //timer.Start();
 
             new Test();
+
+            Application.Run(new ApplicationContext());
+
 
         }
 
@@ -55,7 +50,7 @@ namespace AppSwitchLibrary
         }
         void mouse_MouseMoved(object sender, EventArgs e)
         {
-            Console.WriteLine("Mouse: " +FormatDateTime(DateTime.Now));
+            Console.WriteLine("Mouse: " + FormatDateTime(DateTime.Now));
         }
     }
 }
