@@ -43,12 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllInputSources.cs" />
+    <Compile Include="ApplicationDetails.cs" />
     <Compile Include="InputTracker.cs" />
     <Compile Include="KeyboardInput.cs" />
     <Compile Include="MouseInput.cs" />
     <Compile Include="ProcessUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ActiveApplication.cs" />
+    <Compile Include="ActiveApplicationInput.cs" />
+    <Compile Include="XmlUtils.cs" />
     <Compile Include="WindowsHookHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

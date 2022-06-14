@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AppSwitchLibrary
 {
-    public class ActiveApplication
+    public class ActiveApplicationInput
     {
         WindowsHookHelper.WinEventDelegate dele = null;
         public event EventHandler<String> ApplicationSwitched;
@@ -18,11 +19,16 @@ namespace AppSwitchLibrary
         private const uint WINEVENT_OUTOFCONTEXT = 0;
         private const uint EVENT_SYSTEM_FOREGROUND = 3;
 
-        public ActiveApplication()
+        public ActiveApplicationInput()
         {
 
             dele = new WindowsHookHelper.WinEventDelegate(WinEventProc);
             IntPtr m_hhook = WindowsHookHelper.SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, WINEVENT_OUTOFCONTEXT);
+
+            if (m_hhook == IntPtr.Zero)
+            {
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+            }
         }
 
 
@@ -33,6 +39,7 @@ namespace AppSwitchLibrary
             IntPtr handle = IntPtr.Zero;
             StringBuilder Buff = new StringBuilder(nChars);
             handle = WindowsHookHelper.GetForegroundWindow();
+
 
             // To get window title.
             //if (WindowsHookHelper.GetWindowText(handle, Buff, nChars) > 0)
@@ -56,6 +63,7 @@ namespace AppSwitchLibrary
             if (ApplicationSwitched != null)
                 ApplicationSwitched(this, title);
 
+            m_hhook = hWinEventHook;
         }
 
         public void Dispose()
@@ -69,14 +77,16 @@ namespace AppSwitchLibrary
             {
                 if (m_hhook != IntPtr.Zero)
                 {
-                    WindowsHookHelper.UnhookWindowsHookEx(m_hhook);
+                    WindowsHookHelper.UnhookWinEvent(m_hhook);
                 }
 
                 disposed = true;
+
+                
             }
         }
 
-        ~ActiveApplication()
+        ~ActiveApplicationInput()
         {
             Dispose(false);
         }

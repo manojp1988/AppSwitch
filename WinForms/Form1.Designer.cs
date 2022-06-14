@@ -35,11 +35,16 @@
             this.keyboardActiveLabel = new System.Windows.Forms.Label();
             this.mouseActiveLabel = new System.Windows.Forms.Label();
             this.exitBtn = new System.Windows.Forms.Button();
+            this.latestApplicationBtn = new System.Windows.Forms.Button();
+            this.getAllUsedApplicationBtn = new System.Windows.Forms.Button();
+            this.appOutput = new System.Windows.Forms.TextBox();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.clearBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(283, 24);
+            this.startBtn.Location = new System.Drawing.Point(179, 24);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(112, 35);
             this.startBtn.TabIndex = 0;
@@ -49,7 +54,7 @@
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(430, 24);
+            this.stopBtn.Location = new System.Drawing.Point(318, 24);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(112, 35);
             this.stopBtn.TabIndex = 1;
@@ -97,7 +102,7 @@
             // 
             // exitBtn
             // 
-            this.exitBtn.Location = new System.Drawing.Point(583, 24);
+            this.exitBtn.Location = new System.Drawing.Point(676, 24);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(112, 35);
             this.exitBtn.TabIndex = 6;
@@ -105,11 +110,65 @@
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
+            // latestApplicationBtn
+            // 
+            this.latestApplicationBtn.Location = new System.Drawing.Point(28, 234);
+            this.latestApplicationBtn.Name = "latestApplicationBtn";
+            this.latestApplicationBtn.Size = new System.Drawing.Size(228, 23);
+            this.latestApplicationBtn.TabIndex = 7;
+            this.latestApplicationBtn.Text = "Get Latest Application";
+            this.latestApplicationBtn.UseVisualStyleBackColor = true;
+            this.latestApplicationBtn.Click += new System.EventHandler(this.latestApplicationBtn_Click);
+            // 
+            // getAllUsedApplicationBtn
+            // 
+            this.getAllUsedApplicationBtn.Location = new System.Drawing.Point(346, 234);
+            this.getAllUsedApplicationBtn.Name = "getAllUsedApplicationBtn";
+            this.getAllUsedApplicationBtn.Size = new System.Drawing.Size(228, 23);
+            this.getAllUsedApplicationBtn.TabIndex = 8;
+            this.getAllUsedApplicationBtn.Text = "Get All Used Application";
+            this.getAllUsedApplicationBtn.UseVisualStyleBackColor = true;
+            this.getAllUsedApplicationBtn.Click += new System.EventHandler(this.getAllUsedApplicationBtn_Click);
+            // 
+            // appOutput
+            // 
+            this.appOutput.Location = new System.Drawing.Point(28, 285);
+            this.appOutput.Multiline = true;
+            this.appOutput.Name = "appOutput";
+            this.appOutput.ReadOnly = true;
+            this.appOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.appOutput.Size = new System.Drawing.Size(720, 139);
+            this.appOutput.TabIndex = 9;
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(25, 35);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(85, 13);
+            this.statusLabel.TabIndex = 10;
+            this.statusLabel.Text = "Listener active...";
+            // 
+            // clearBtn
+            // 
+            this.clearBtn.Location = new System.Drawing.Point(451, 24);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(112, 35);
+            this.clearBtn.TabIndex = 11;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.clearBtn);
+            this.Controls.Add(this.statusLabel);
+            this.Controls.Add(this.appOutput);
+            this.Controls.Add(this.getAllUsedApplicationBtn);
+            this.Controls.Add(this.latestApplicationBtn);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.mouseActiveLabel);
             this.Controls.Add(this.keyboardActiveLabel);
@@ -117,6 +176,7 @@
             this.Controls.Add(this.keyboardActiveBtn);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -133,6 +193,11 @@
         private System.Windows.Forms.Label keyboardActiveLabel;
         private System.Windows.Forms.Label mouseActiveLabel;
         private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.Button latestApplicationBtn;
+        private System.Windows.Forms.Button getAllUsedApplicationBtn;
+        private System.Windows.Forms.TextBox appOutput;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button clearBtn;
     }
 }
 

@@ -26,11 +26,13 @@ namespace WinForms
         private void startBtn_Click(object sender, EventArgs e)
         {
             inputTracker.Start();
+            statusLabel.Text = "Listener active...";
         }
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
             inputTracker.Stop();
+            statusLabel.Text = "Listener Stopped.";
         }
 
         private void keyboardActiveBtn_Click(object sender, EventArgs e)
@@ -48,6 +50,23 @@ namespace WinForms
         private void exitBtn_Click(object sender, EventArgs e)
         {
             inputTracker.Exit();
+        }
+
+        private void latestApplicationBtn_Click(object sender, EventArgs e)
+        {
+            var output = inputTracker.GetLatestApplication();
+            appOutput.Text = output == null ? "No data found" : output;
+        }
+
+        private void getAllUsedApplicationBtn_Click(object sender, EventArgs e)
+        {
+            var output = inputTracker.GetAllActiveApplication();
+            appOutput.Text = output == null ? "No data found" : output;
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            inputTracker.Clear();
         }
     }
 }

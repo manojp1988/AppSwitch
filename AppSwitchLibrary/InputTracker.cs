@@ -16,10 +16,15 @@ namespace AppSwitchLibrary
         private AllInputSources lastInput;
         private KeyboardInput keyboard;
         private MouseInput mouse;
-        private ActiveApplication application;
+        private ActiveApplicationInput application;
 
         private String lastKeyboardActiveTime;
         private String lastMouseActiveTime;
+        private ApplicationDetails latestApplication;
+
+        private bool isListening = false;
+
+        private Dictionary<string, ApplicationDetails> allAppDetails = new Dictionary<string, ApplicationDetails>();
 
         public InputTracker(bool _initWindowsForms = true)
         {
@@ -33,6 +38,10 @@ namespace AppSwitchLibrary
 
         public void Start()
         {
+            if(isListening)
+                return;
+
+            
             keyboard = new KeyboardInput();
             keyboard.KeyBoardKeyPressed += keyboard_KeyBoardKeyPressed;
 
@@ -40,8 +49,10 @@ namespace AppSwitchLibrary
             mouse.MouseMoved += mouse_MouseMoved;
 
 
-            application = new ActiveApplication();
+            application = new ActiveApplicationInput();
             application.ApplicationSwitched += application_Switched;
+
+            isListening = true;
 
         }
 
@@ -57,9 +68,64 @@ namespace AppSwitchLibrary
 
         public void Stop()
         {
+
+             if(!isListening)
+                return;
+
             keyboard.Dispose();
             mouse.Dispose();
             application.Dispose();
+
+            keyboard = null;
+            mouse = null;
+            application = null;
+
+            isListening = false;
+        }
+
+        public String GetLatestApplication()
+        {
+            List<ApplicationDetails> details = new List<ApplicationDetails>();
+
+            if (latestApplication != null)
+            {
+                details.Add(latestApplication);
+
+
+                ActiveApp app = new ActiveApp()
+                {
+                    details = details
+                };
+
+
+                return XmlUtils.Serialize(app);
+            }
+
+
+            return null;
+        }
+
+        public String GetAllActiveApplication()
+        {
+            if (allAppDetails.Any())
+            {
+                List<ApplicationDetails> applicationDetails = allAppDetails.Values.ToList();
+
+                ActiveApp app = new ActiveApp()
+                {
+                    details = applicationDetails
+                };
+
+                return XmlUtils.Serialize(app);
+
+            }
+
+            return null;
+        }
+
+        public void Clear()
+        {
+            allAppDetails.Clear();
         }
 
         public void Exit()
@@ -69,7 +135,22 @@ namespace AppSwitchLibrary
 
         void application_Switched(object sender, string e)
         {
-            Console.WriteLine("Switched to: " + e + " at : " + FormatDateTime(DateTime.Now));
+
+            var now = DateTime.Now;
+            var latestApplication = new ApplicationDetails()
+            {
+                Name = e,
+                data = new ActiveData()
+                {
+                    Date = FormateDate(now),
+                    Time = FormatDateTime(now)
+                }
+            };
+
+            this.latestApplication = latestApplication;
+
+            allAppDetails[e] = latestApplication;
+
         }
 
         void keyboard_KeyBoardKeyPressed(object sender, EventArgs e)
@@ -81,6 +162,12 @@ namespace AppSwitchLibrary
         {
             return dateTime.ToString("HH:mm:ss fff", CultureInfo.CurrentUICulture);
         }
+
+        private string FormateDate(DateTime dateTime)
+        {
+            return dateTime.ToString("yyMMdd", CultureInfo.CurrentUICulture);
+        }
+
 
         void mouse_MouseMoved(object sender, EventArgs e)
         {
