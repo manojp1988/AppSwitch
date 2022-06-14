@@ -48,7 +48,7 @@
     <Compile Include="MouseInput.cs" />
     <Compile Include="ProcessUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="ActiveApplication.cs" />
     <Compile Include="WindowsHookHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

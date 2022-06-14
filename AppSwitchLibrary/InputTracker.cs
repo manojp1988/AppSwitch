@@ -16,10 +16,23 @@ namespace AppSwitchLibrary
         private AllInputSources lastInput;
         private KeyboardInput keyboard;
         private MouseInput mouse;
+        private ActiveApplication application;
 
-        public InputTracker()
+        private String lastKeyboardActiveTime;
+        private String lastMouseActiveTime;
+
+        public InputTracker(bool _initWindowsForms = true)
         {
 
+            Start();
+
+            if (_initWindowsForms)
+                Application.Run(new ApplicationContext());
+
+        }
+
+        public void Start()
+        {
             keyboard = new KeyboardInput();
             keyboard.KeyBoardKeyPressed += keyboard_KeyBoardKeyPressed;
 
@@ -27,30 +40,51 @@ namespace AppSwitchLibrary
             mouse.MouseMoved += mouse_MouseMoved;
 
 
-            new Test();
-
-            Application.Run(new ApplicationContext());
-
+            application = new ActiveApplication();
+            application.ApplicationSwitched += application_Switched;
 
         }
 
-        private void timer_Tick2(object state)
+        public string GetLastKeyboardActiveTime()
         {
-            //Console.WriteLine(FormatDateTime(lastInput.GetLastInputTime()));
+            return lastKeyboardActiveTime;
+        }
+
+        public string GetLastMouseActiveTime()
+        {
+            return lastMouseActiveTime;
+        }
+
+        public void Stop()
+        {
+            keyboard.Dispose();
+            mouse.Dispose();
+            application.Dispose();
+        }
+
+        public void Exit()
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        void application_Switched(object sender, string e)
+        {
+            Console.WriteLine("Switched to: " + e + " at : " + FormatDateTime(DateTime.Now));
         }
 
         void keyboard_KeyBoardKeyPressed(object sender, EventArgs e)
         {
-            Console.WriteLine("Keyboard: " + FormatDateTime(DateTime.Now));
+            lastKeyboardActiveTime = FormatDateTime(DateTime.Now);
         }
 
         private string FormatDateTime(DateTime dateTime)
         {
             return dateTime.ToString("HH:mm:ss fff", CultureInfo.CurrentUICulture);
         }
+
         void mouse_MouseMoved(object sender, EventArgs e)
         {
-            Console.WriteLine("Mouse: " + FormatDateTime(DateTime.Now));
+            lastMouseActiveTime = FormatDateTime(DateTime.Now);
         }
     }
 }
